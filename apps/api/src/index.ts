@@ -6,6 +6,8 @@ import v1Router from "./routes/v1";
 
 const app = express();
 
+app.use(express.json());
+
 app.get("/", (req: Request, res: Response, next: NextFunction) => {
   res.send("<h1>API is running</h1>");
 });
