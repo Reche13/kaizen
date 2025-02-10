@@ -5,5 +5,7 @@ export const loginRouter = (
   res: Response,
   next: NextFunction
 ) => {
+  const { email, password } = req.body;
+
   res.status(200);
 };

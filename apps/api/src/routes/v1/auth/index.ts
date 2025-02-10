@@ -7,7 +7,7 @@ import { googleRouter } from "./googleRouter";
 const router: Router = Router();
 
 // LOGIN
-router.get("/login", loginRouter);
+router.post("/login", loginRouter);
 
 // SIGNUP
 router.get("/signup", signupRouter);
