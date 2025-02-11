@@ -16,7 +16,7 @@ router.post("/signup", validate(signupUserSchema), signupRouter);
 // GOOGLE LOGIN
 router.get("/oauth2/google", googleRouter);
 
-// LOGOUT+
+// LOGOUT
 router.get("/logout", logoutRouter);
 
 export default router;
