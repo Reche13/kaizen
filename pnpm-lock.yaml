@@ -20,6 +20,9 @@ importers:
 
   apps/api:
     dependencies:
+      '@kaizen/db':
+        specifier: workspace:*
+        version: link:../../packages/db
       axios:
         specifier: ^1.7.9
         version: 1.7.9
