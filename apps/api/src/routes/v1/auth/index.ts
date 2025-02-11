@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { loginRouter, loginUserSchema } from "./loginRouter";
 import { logoutRouter } from "./logoutRouter";
-import { signupRouter } from "./signupRouter";
+import { signupRouter, signupUserSchema } from "./signupRouter";
 import { googleRouter } from "./googleRouter";
 import { validate } from "../../../middlewares/validate";
 
@@ -11,7 +11,7 @@ const router: Router = Router();
 router.post("/login", validate(loginUserSchema), loginRouter);
 
 // SIGNUP
-router.get("/signup", signupRouter);
+router.post("/signup", validate(signupUserSchema), signupRouter);
 
 // GOOGLE LOGIN
 router.get("/oauth2/google", googleRouter);
