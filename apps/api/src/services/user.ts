@@ -1,4 +1,4 @@
-import db, { Account } from "@kaizen/db/client";
+import db, { Account, User } from "@kaizen/db/client";
 import AlreadyExisitsException from "../exceptions/alreadyExists";
 
 export const getUserbyEmail = async (email: string) => {
@@ -56,6 +56,31 @@ export const updateUserEmailVerify = async (
     return user;
   } catch (error: any) {
     throw new Error("Something went wrong in updating user email verified");
+  }
+};
+
+export const upsetUser = async (
+  data: Pick<User, "email" | "emailVerified" | "name" | "image">
+) => {
+  try {
+    const user = await db.user.upsert({
+      where: {
+        email: data.email,
+      },
+      update: {
+        emailVerified: data.emailVerified ?? undefined,
+        image: data.image ?? undefined,
+      },
+      create: {
+        email: data.email,
+        name: data.name,
+        emailVerified: data.emailVerified ?? null,
+        image: data.image ?? null,
+      },
+    });
+    return user;
+  } catch (error: any) {
+    throw new Error("Something went wrong in creating user");
   }
 };
 

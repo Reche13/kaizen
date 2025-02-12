@@ -4,7 +4,7 @@ import { getUserbyEmail } from "../../../services/user";
 import NotFoundException from "../../../exceptions/notFound";
 import { compare } from "../../../libs/scrypt";
 import InvalidCredentialsException from "../../../exceptions/invalidCredentials";
-import { JwtProvier } from "../../../providers/JwtProvider";
+import { JwtProvider } from "../../../providers/JwtProvider";
 import { setHttpCookie } from "../../../libs/cookies";
 
 export const loginUserSchema = z.object({
@@ -31,7 +31,7 @@ export const loginRouter = async (
       throw new InvalidCredentialsException();
     }
 
-    const jwtProvider = new JwtProvier({
+    const jwtProvider = new JwtProvider({
       id: user.id,
       name: user.name,
       email: user.email,

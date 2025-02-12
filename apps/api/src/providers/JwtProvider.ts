@@ -7,7 +7,7 @@ interface JwtData {
   image?: string | null;
 }
 
-export class JwtProvier {
+export class JwtProvider {
   private data: JwtData;
 
   constructor(data: JwtData) {
