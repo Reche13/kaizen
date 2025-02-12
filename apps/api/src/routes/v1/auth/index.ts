@@ -21,6 +21,6 @@ router.get("/verify", verifyRouter);
 router.get("/oauth2/google", googleRouter);
 
 // LOGOUT
-router.get("/logout", logoutRouter);
+router.post("/logout", logoutRouter);
 
 export default router;
