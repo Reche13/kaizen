@@ -41,3 +41,20 @@ export const createUser = async (
     throw new Error("Something went wrong in creating user");
   }
 };
+
+export const updateUserEmailVerify = async (
+  email: string,
+  emailVerified: boolean
+) => {
+  try {
+    const user = await db.user.update({
+      where: { email },
+      data: {
+        emailVerified: emailVerified,
+      },
+    });
+    return user;
+  } catch (error: any) {
+    throw new Error("Something went wrong in updating user email verified");
+  }
+};

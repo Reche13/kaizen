@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import z from "zod";
 import { hash } from "../../../libs/scrypt";
 import { createUser } from "../../../services/user";
+import { generateEmailVerifyToken } from "../../../libs/jwt";
 
 export const signupUserSchema = z.object({
   name: z.string().min(2),
@@ -20,8 +21,23 @@ export const signupRouter = async (
   try {
     const saltHashPassword = await hash(password);
     const user = await createUser(name, email, saltHashPassword);
-    const { hashedPassword, ...userWithoutPassword } = user;
-    res.send(userWithoutPassword);
+
+    // create verify token
+    const token = generateEmailVerifyToken({ email });
+    if (!token) {
+      throw new Error("failed to generate email verify token");
+    }
+    // TODO: need to change link later and make it frontend
+    const verificationLink = `http://localhost:8000/api/v1/auth/verify?token=${token}`;
+
+    // send email with token
+    // TODO: EMAIL
+
+    res.status(200).json({
+      message: `verification link has been sent to your email address. ${
+        verificationLink
+      }`,
+    });
   } catch (error: any) {
     next(error);
   }

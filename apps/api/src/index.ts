@@ -1,6 +1,7 @@
-import { config } from "dotenv";
-config();
-import express, { NextFunction, Request, Response } from "express";
+import dotenv from "dotenv";
+dotenv.config();
+
+import express from "express";
 
 import v1Router from "./routes/v1";
 import { errorHandler } from "./middlewares/errorHandler";
