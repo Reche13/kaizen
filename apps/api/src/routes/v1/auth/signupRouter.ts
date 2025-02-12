@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import z from "zod";
 import { hash } from "../../../libs/scrypt";
-import { createUser } from "../../../services/user";
+import { createUser, upsetUserAccount } from "../../../services/user";
 import { generateEmailVerifyToken } from "../../../libs/jwt";
 
 export const signupUserSchema = z.object({
@@ -21,6 +21,12 @@ export const signupRouter = async (
   try {
     const saltHashPassword = await hash(password);
     const user = await createUser(name, email, saltHashPassword);
+
+    await upsetUserAccount({
+      userId: user.id,
+      provider: "EMAIL",
+      providerAccountId: user.email,
+    });
 
     // create verify token
     const token = generateEmailVerifyToken({ email });
