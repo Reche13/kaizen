@@ -1,4 +1,4 @@
-import db, { Account, User } from "@kaizen/db/client";
+import db, { Account, User } from "../libs/prisma";
 import AlreadyExisitsException from "../exceptions/alreadyExists";
 
 export const getUserbyEmail = async (email: string) => {
@@ -86,7 +86,7 @@ export const upsetUser = async (
 
 export const upsetUserAccount = async (
   data: Pick<Account, "userId" | "provider" | "providerAccountId">
-) => {
+): Promise<Account> => {
   try {
     const account = await db.account.upsert({
       where: {
