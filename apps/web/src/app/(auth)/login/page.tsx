@@ -1,9 +1,6 @@
-import { getGoogleOAuth2Url } from "@/libs/google";
 import React from "react";
 import LoginForm from "./_components/LoginForm";
-import Link from "next/link";
-import Image from "next/image";
-import googleImage from "@/assets/logos/google.png";
+import { GoogleLoginButton } from "./_components/GoogleLoginButton";
 
 const Page = () => {
   return (
@@ -31,15 +28,9 @@ const Page = () => {
         </div>
 
         {/* GOOGLE LOGIN */}
-        <Link
-          href={getGoogleOAuth2Url()}
-          className="mt-10 w-full max-w-[360px] flex items-center justify-center gap-3 bg-gray-900 hover:bg-gray-900/90 px-4 py-[10px] rounded-md"
-        >
-          <Image src={googleImage} alt="google" height={20} width={20} />
-          <span className="text-white text-base font-medium">
-            Login with Google
-          </span>
-        </Link>
+        <div className="m-10">
+          <GoogleLoginButton />
+        </div>
       </div>
     </div>
   );
