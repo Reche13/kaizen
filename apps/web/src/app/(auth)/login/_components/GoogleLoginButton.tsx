@@ -7,17 +7,10 @@ import {
 import Image from "next/image";
 import googleImage from "@/assets/logos/google.png";
 import { useRouter } from "next/navigation";
+import { googleAuth } from "./googleAuth";
 
 const GoogleLogin = () => {
   const router = useRouter();
-  const googleAuth = async (code: string) => {
-    const res = await fetch(
-      `http://localhost:8000/api/v1/auth/oauth2/google?code=${code}`
-    );
-    const data = await res.json();
-    console.log(data);
-    return data;
-  };
 
   const onGoogleLoginSuccess = async (authResult: CodeResponse) => {
     try {
