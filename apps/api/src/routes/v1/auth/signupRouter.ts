@@ -34,7 +34,7 @@ export const signupRouter = async (
       throw new Error("failed to generate email verify token");
     }
     // TODO: need to change link later and make it frontend
-    const verificationLink = `http://localhost:8000/api/v1/auth/verify?token=${token}`;
+    const verificationLink = `http://localhost:3000/verify-email?token=${token}`;
 
     // send email with token
     // TODO: EMAIL

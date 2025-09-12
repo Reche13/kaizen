@@ -10,6 +10,11 @@ interface SignupResponse {
   message: string;
 }
 
+interface VerifyResponse {
+  success: boolean;
+  message: string;
+}
+
 export async function login(email: string, password: string) {
   const { data } = await publicApi.post<LoginResponse>("/auth/login", {
     email,
@@ -23,6 +28,15 @@ export async function signup(name: string, email: string, password: string) {
     name,
     email,
     password,
+  });
+  return data;
+}
+
+export async function verifyEmail(token: string) {
+  const { data } = await publicApi.get<VerifyResponse>("/auth/verify", {
+    params: {
+      token,
+    },
   });
   return data;
 }
