@@ -1,6 +1,6 @@
 import React from "react";
 import LoginForm from "./_components/LoginForm";
-import { GoogleLoginButton } from "../(forms)/_components/GoogleLoginButton";
+import { GoogleLoginButton } from "../_components/GoogleLoginButton";
 
 const Page = () => {
   return (
