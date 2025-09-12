@@ -39,10 +39,10 @@ export const signupRouter = async (
     // send email with token
     // TODO: EMAIL
 
+    console.log("VERIFICATION LINK: ", verificationLink);
     res.status(200).json({
-      message: `verification link has been sent to your email address. ${
-        verificationLink
-      }`,
+      success: true,
+      message: "verification link has been sent to your email address.",
     });
   } catch (error: any) {
     next(error);

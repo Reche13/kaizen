@@ -8,7 +8,7 @@ import Image from "next/image";
 import googleImage from "@/assets/logos/google.png";
 import { useRouter } from "next/navigation";
 import { googleAuth } from "./googleAuth";
-import { useAuthStore } from "@/store/auth";
+import { useAuthStore } from "@/stores/auth";
 
 const GoogleLogin = () => {
   const router = useRouter();

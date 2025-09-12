@@ -1,10 +1,10 @@
 import React from "react";
 import LoginForm from "./_components/LoginForm";
-import { GoogleLoginButton } from "./_components/GoogleLoginButton";
+import { GoogleLoginButton } from "../_components/GoogleLoginButton";
 
 const Page = () => {
   return (
-    <div className="shrink-0 border h-screen flex-[2] flex flex-col items-center">
+    <div className="shrink-0 h-screen flex-[2] flex flex-col items-center">
       <div className="w-[360px]">
         <div className="mt-20">
           <h1 className="text-4xl font-bold text-gray-900">
@@ -28,7 +28,7 @@ const Page = () => {
         </div>
 
         {/* GOOGLE LOGIN */}
-        <div className="m-10">
+        <div className="mt-10 w-full">
           <GoogleLoginButton />
         </div>
       </div>
