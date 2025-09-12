@@ -4,6 +4,7 @@ import { JwtPayload } from "jsonwebtoken";
 import { getUserbyEmail, updateUserEmailVerify } from "../../../services/user";
 import NotFoundException from "../../../exceptions/notFound";
 import InvalidCredentialsException from "../../../exceptions/invalidCredentials";
+import AlreadyExisitsException from "../../../exceptions/alreadyExists";
 
 export const verifyRouter = async (
   req: Request,
@@ -19,10 +20,12 @@ export const verifyRouter = async (
     if (!user) throw new NotFoundException("user not found");
 
     if (user.emailVerified) {
-      res.status(200).json({ message: "email is already verified" });
+      throw new AlreadyExisitsException("Email is already verified");
     } else {
       await updateUserEmailVerify(email, true);
-      res.status(200).json({ message: "email is successfully verified" });
+      res
+        .status(200)
+        .json({ success: true, message: "email verified successfully" });
     }
   } catch (error: any) {
     next(error);

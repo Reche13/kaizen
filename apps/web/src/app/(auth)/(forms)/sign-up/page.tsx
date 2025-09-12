@@ -1,6 +1,6 @@
 import React from "react";
 import SignupForm from "./_components/SignupForm";
-import { GoogleLoginButton } from "../_components/GoogleLoginButton";
+import { GoogleLoginButton } from "../(forms)/_components/GoogleLoginButton";
 
 const Page = () => {
   return (
@@ -16,7 +16,7 @@ const Page = () => {
           </p>
         </div>
 
-        {/* LOGIN FORM */}
+        {/* SIGNUP FORM */}
         <div className="mt-10">
           <SignupForm />
         </div>
