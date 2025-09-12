@@ -8,17 +8,23 @@ import Image from "next/image";
 import googleImage from "@/assets/logos/google.png";
 import { useRouter } from "next/navigation";
 import { googleAuth } from "./googleAuth";
+import { useAuthStore } from "@/store/auth";
 
 const GoogleLogin = () => {
   const router = useRouter();
+  const { setAuth } = useAuthStore();
 
   const onGoogleLoginSuccess = async (authResult: CodeResponse) => {
     try {
       if (authResult.code) {
         const result = await googleAuth(authResult.code);
-
-        console.log(result);
-        // router.push("/dashboard");
+        if (result.success) {
+          setAuth(result.accessToken);
+          console.log(result);
+          router.push("/dashboard");
+        } else {
+          throw new Error("Google Login Failed");
+        }
       } else {
         throw new Error("Google Login Failed");
       }
