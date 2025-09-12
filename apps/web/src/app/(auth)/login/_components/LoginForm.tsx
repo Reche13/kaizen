@@ -49,7 +49,7 @@ const LoginForm = () => {
         />
       </div>
       {errors.email && (
-        <p className="text-xs text-red-500 mt-1">{errors.email.message}</p>
+        <p className="text-xs text-red-600 mt-1">{errors.email.message}</p>
       )}
 
       {/* PASSWORD */}
@@ -73,7 +73,7 @@ const LoginForm = () => {
         </button>
       </div>
       {errors.password && (
-        <p className="text-xs text-red-500 mt-1">{errors.password.message}</p>
+        <p className="text-xs text-red-600 mt-1">{errors.password.message}</p>
       )}
 
       {/* SUBMIT */}
@@ -86,8 +86,8 @@ const LoginForm = () => {
 
       {/* SERVER ERROR */}
       {serverError && (
-        <div className="text-xs w-full text-center flex items-center justify-center gap-2 px-3 py-1 rounded-sm bg-red-100 text-red-500 mt-4">
-          <AlertCircle size={14} />
+        <div className="text-xs w-full flex items-center gap-2 px-3 py-1 rounded-md bg-red-100 text-red-600 mt-4">
+          <AlertCircle size={20} />
           {serverError}
         </div>
       )}

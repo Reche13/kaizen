@@ -48,7 +48,7 @@ const SignupForm = () => {
         />
       </div>
       {errors.name && (
-        <p className="text-xs text-red-500 mt-1">{errors.name.message}</p>
+        <p className="text-xs text-red-600 mt-1">{errors.name.message}</p>
       )}
 
       {/* EMAIL */}
@@ -61,7 +61,7 @@ const SignupForm = () => {
         />
       </div>
       {errors.email && (
-        <p className="text-xs text-red-500 mt-1">{errors.email.message}</p>
+        <p className="text-xs text-red-600 mt-1">{errors.email.message}</p>
       )}
 
       {/* PASSWORD */}
@@ -85,7 +85,7 @@ const SignupForm = () => {
         </button>
       </div>
       {errors.password && (
-        <p className="text-xs text-red-500 mt-1">{errors.password.message}</p>
+        <p className="text-xs text-red-600 mt-1">{errors.password.message}</p>
       )}
 
       {/* SUBMIT */}
@@ -98,7 +98,7 @@ const SignupForm = () => {
 
       {/* SERVER ERROR */}
       {serverError && (
-        <div className="text-xs w-full text-center flex items-center justify-center gap-2 px-3 py-1 rounded-sm bg-red-100 text-red-500 mt-4">
+        <div className="text-xs w-full text-center flex items-center justify-center gap-2 px-3 py-1 rounded-sm bg-red-100 text-red-600 mt-4">
           <AlertCircle size={14} />
           {serverError}
         </div>
@@ -106,8 +106,8 @@ const SignupForm = () => {
 
       {/* SERVER SUCCESS */}
       {successMessage && (
-        <div className="text-xs w-full text-center flex items-center justify-center gap-2 px-3 py-1 rounded-sm bg-green-100 text-green-500 mt-4">
-          <CheckCircle2 size={14} />
+        <div className="text-xs w-full flex items-center gap-2 px-3 py-1 rounded-sm bg-green-100 text-green-600 mt-4">
+          <CheckCircle2 size={20} />
           {successMessage}
         </div>
       )}

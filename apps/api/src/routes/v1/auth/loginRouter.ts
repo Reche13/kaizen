@@ -6,6 +6,7 @@ import { compare } from "../../../libs/scrypt";
 import InvalidCredentialsException from "../../../exceptions/invalidCredentials";
 import { JwtProvider } from "../../../providers/JwtProvider";
 import { setHttpCookie } from "../../../libs/cookies";
+import ForbiddenException from "../../../exceptions/forbidden";
 
 export const loginUserSchema = z.object({
   email: z.string().email(),
@@ -29,6 +30,12 @@ export const loginRouter = async (
 
     if (!passwordCorrect) {
       throw new InvalidCredentialsException();
+    }
+
+    if (!user.emailVerified) {
+      throw new ForbiddenException(
+        "Email not verified. Please check your inbox for the verification link."
+      );
     }
 
     const jwtProvider = new JwtProvider({
