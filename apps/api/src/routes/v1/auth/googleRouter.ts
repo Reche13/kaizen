@@ -66,9 +66,7 @@ export const googleRouter = async (
 
     setHttpCookie(res, "refresh_token", refreshToken);
 
-    res
-      .status(200)
-      .json({ success: true, message: "logged in", access: token });
+    res.status(200).json({ success: true, accessToken: token });
   } catch (error: any) {
     next(error);
   }

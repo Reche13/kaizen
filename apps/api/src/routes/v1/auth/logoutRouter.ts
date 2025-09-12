@@ -7,7 +7,6 @@ export const logoutRouter = (
   next: NextFunction
 ) => {
   try {
-    clearHttpCookie(res, "access_token");
     clearHttpCookie(res, "refresh_token");
     res.status(200).json({ success: true, message: "logged out" });
   } catch (error: any) {
