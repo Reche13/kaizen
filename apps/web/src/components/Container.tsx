@@ -1,7 +1,22 @@
 import { ReactNode } from "react";
 
-export default function Container({ children }: { children: ReactNode }) {
-  return <div className="max-w-[1280px] mx-auto px-5 md:px-8">{children}</div>;
+export default function Container({
+  children,
+  size = 1280,
+}: {
+  children: ReactNode;
+  size?: 1280 | 1440 | 1920;
+}) {
+  return (
+    <div
+      style={{
+        maxWidth: `${size}px`,
+      }}
+      className="mx-auto px-4 md:px-5"
+    >
+      {children}
+    </div>
+  );
 }
 
 export { Container };

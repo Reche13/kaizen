@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getOrganizations, createOrganization } from "@/services/organization";
+import Link from "next/link";
 
 const Organizations = () => {
   const [name, setName] = useState("");
@@ -22,6 +23,9 @@ const Organizations = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["organizations"] });
       setName("");
+    },
+    onError: (err: any) => {
+      alert(err?.response?.data?.message || "Failed to create organization");
     },
   });
 
@@ -56,9 +60,13 @@ const Organizations = () => {
         <ul className="space-y-2">
           {getOrgsData.organizations.map(
             (org: { id: string; name: string }) => (
-              <li key={org.id} className="border rounded p-2 bg-gray-50">
+              <Link
+                href={`/dashboard/${org.id}`}
+                key={org.id}
+                className="border rounded p-2 bg-gray-50"
+              >
                 {org.name}
-              </li>
+              </Link>
             )
           )}
         </ul>

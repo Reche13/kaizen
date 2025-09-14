@@ -18,8 +18,8 @@ export default {
         },
         surface: {
           primary: "#FFFFFF",
-          seconday: "EAEAEA",
-          tertiary: "F5F5F5",
+          seconday: "#EAEAEA",
+          tertiary: "#F5F5F5",
           accent: "#EAF2FF",
         },
         gray: {
