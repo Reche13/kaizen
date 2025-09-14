@@ -7,12 +7,10 @@ const Page = () => {
     <div className="shrink-0 h-screen flex-[2] flex flex-col items-center">
       <div className="w-[360px]">
         <div className="mt-20">
-          <h1 className="text-4xl font-bold text-gray-900">
-            New Here? <br />
-            Let’s Set Things Up
-          </h1>
+          <h1 className="text-4xl font-bold text-gray-900">Sign Up Now</h1>
           <p className="text-base text-gray-600 font-normal mt-2">
-            Choose your preferred sign up method
+            Our registration process is quick and easy, taking no more than 5
+            minutes to complete
           </p>
         </div>
 
