@@ -24,6 +24,9 @@ model User {
   updatedAt      DateTime @updatedAt
 
   accounts Account[]
+
+  organizations Organization[] @relation("UserOrganizations")
+  memberOf      Organization[] @relation("OrganizationMembers")
 }
 
 enum Providers {
@@ -37,8 +40,20 @@ model Account {
   providerAccountId String
   userId            String
   createdAt         DateTime  @default(now())
-  User              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
   @@unique([provider, userId])
+}
+
+model Organization {
+  id        String   @id @default(uuid())
+  name      String
+  image     String?
+  ownerId   String
+  owner     User     @relation("UserOrganizations", fields: [ownerId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  members User[] @relation("OrganizationMembers")
 }
