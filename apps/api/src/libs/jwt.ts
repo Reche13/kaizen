@@ -1,5 +1,6 @@
-import { sign, verify, decode } from "jsonwebtoken";
+import { sign, verify, decode, JwtPayload } from "jsonwebtoken";
 import InvalidCredentialsException from "../exceptions/invalidCredentials";
+import { AuthPayload } from "../types";
 
 export const decodeToken = (token: string) => {
   return decode(token);
@@ -26,6 +27,17 @@ export const verifyToken = (token: string): Promise<boolean> => {
       resolve(false);
     }
   });
+};
+
+export const verifyTokenAndDecode = (
+  token: string
+): AuthPayload | undefined => {
+  try {
+    const decoded = verify(token, process.env.JWT_SECRET as string);
+    return decoded as AuthPayload;
+  } catch (error) {
+    return undefined;
+  }
 };
 
 export const verifyRefreshToken = (token: string): Promise<boolean> => {
