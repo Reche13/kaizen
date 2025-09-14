@@ -31,3 +31,19 @@ export const getUserOrganizations = async (
     throw new Error("failed to get user organizations");
   }
 };
+
+export const getOrganizationMembers = async (orgId: string) => {
+  try {
+    const organization = await db.organization.findUnique({
+      where: { id: orgId },
+      select: {
+        id: true,
+        ownerId: true,
+        members: { select: { id: true } },
+      },
+    });
+    return organization;
+  } catch (error) {
+    return null;
+  }
+};

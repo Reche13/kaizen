@@ -5,6 +5,10 @@ import {
 } from "./createOrganizationRouter";
 import { getOrganizationRouter } from "./getOrganizationRouter";
 import { validate } from "../../../middlewares/validate";
+import {
+  createProjectRouter,
+  createProjectSchema,
+} from "./createProjectRouter";
 
 const router: Router = Router();
 
@@ -13,5 +17,12 @@ router.post("/", validate(createOrganizationSchema), createOrganizationRouter);
 
 // GET USER ORGANIZATIONS
 router.get("/", getOrganizationRouter);
+
+// CREATE PROJECT
+router.post(
+  "/:orgId/projects",
+  validate(createProjectSchema),
+  createProjectRouter
+);
 
 export default router;
