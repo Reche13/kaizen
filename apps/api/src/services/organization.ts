@@ -1,6 +1,9 @@
 import db, { Organization } from "../libs/prisma";
 
-export const createOrganization = async (name: string, userId: string) => {
+export const createOrganization = async (
+  name: string,
+  userId: string
+): Promise<Organization> => {
   try {
     const organization = await db.organization.create({
       data: {
@@ -12,5 +15,19 @@ export const createOrganization = async (name: string, userId: string) => {
     return organization;
   } catch (error) {
     throw new Error("something went wrong in creating organization");
+  }
+};
+
+export const getUserOrganizations = async (
+  userId: string
+): Promise<Organization[]> => {
+  try {
+    const organizations = await db.organization.findMany({
+      where: { ownerId: userId },
+      orderBy: { createdAt: "desc" },
+    });
+    return organizations;
+  } catch (error) {
+    throw new Error("failed to get user organizations");
   }
 };
