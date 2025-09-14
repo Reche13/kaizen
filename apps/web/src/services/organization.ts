@@ -6,10 +6,19 @@ interface createOrganizationResponse {
   organization: Organization;
 }
 
+interface getOrganizationResponse {
+  organizations: Organization[];
+}
+
 export async function createOrganization(name: string) {
   const { data } = await api.post<createOrganizationResponse>(
     "/organizations",
     { name }
   );
+  return data;
+}
+
+export async function getOrganizations() {
+  const { data } = await api.get<getOrganizationResponse>("/organizations");
   return data;
 }

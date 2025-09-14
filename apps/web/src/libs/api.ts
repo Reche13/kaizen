@@ -28,10 +28,12 @@ api.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
+        console.log("Refreshing token");
         const res = await publicApi.post("/auth/refresh");
         const newToken = res.data.accessToken;
 
         useAuthStore.getState().setAuth(newToken);
+        console.log("Token refreshed");
 
         originalRequest.headers.Authorization = `Bearer ${newToken}`;
         return api(originalRequest);
