@@ -5,6 +5,7 @@ import { signupRouter, signupUserSchema } from "./signupRouter";
 import { googleRouter } from "./googleRouter";
 import { validate } from "../../../middlewares/validate";
 import { verifyRouter } from "./verifyRoute";
+import { refreshTokenRouter } from "./refreshRouter";
 
 const router: Router = Router();
 
@@ -13,6 +14,9 @@ router.post("/login", validate(loginUserSchema), loginRouter);
 
 // SIGNUP
 router.post("/signup", validate(signupUserSchema), signupRouter);
+
+// REFRESH TOKEN
+router.post("/refresh", refreshTokenRouter);
 
 // VERIFY EMAIL
 router.get("/verify", verifyRouter);

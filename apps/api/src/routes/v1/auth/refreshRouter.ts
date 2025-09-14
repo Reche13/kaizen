@@ -32,7 +32,7 @@ export const refreshTokenRouter = async (
       image: user.image,
     });
 
-    return res.json({ accessToken: newAccessToken });
+    res.status(200).json({ accessToken: newAccessToken });
   } catch (err: any) {
     next(err);
   }
