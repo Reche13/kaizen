@@ -11,6 +11,7 @@ export const verifyRouter = async (
   res: Response,
   next: NextFunction
 ) => {
+  // TODO: resend verification email
   try {
     const { token } = req.query as { token: string };
     if (!token) throw new InvalidCredentialsException("No token present");
