@@ -52,6 +52,17 @@ export const verifyRefreshToken = (token: string): Promise<boolean> => {
   });
 };
 
+export const verifyRefreshTokenAndDecode = (
+  token: string
+): { email: string } | undefined => {
+  try {
+    const payload = verify(token, process.env.JWT_REFRESH_SECRET as string);
+    return payload as { email: string };
+  } catch (err) {
+    return undefined;
+  }
+};
+
 export const generateEmailVerifyToken = (payload: object) => {
   return sign(payload, process.env.JWT_SECRET as string, {
     expiresIn: Number(process.env.VERIFY_EMAIL_EXPIRY as string),

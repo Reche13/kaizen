@@ -47,7 +47,7 @@ export const loginRouter = async (
 
     const { token, refreshToken } = jwtProvider.generateTokens();
 
-    setHttpCookie(res, "refresh_token", refreshToken);
+    setHttpCookie(res, "refreshToken", refreshToken);
 
     res.status(200).json({ success: true, accessToken: token });
   } catch (error: any) {
