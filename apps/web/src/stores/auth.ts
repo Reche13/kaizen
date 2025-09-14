@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 import { jwtDecode } from "jwt-decode";
 
 interface JwtPayload {
@@ -17,12 +18,19 @@ interface AuthState {
   clearAuth: () => void;
 }
 
-export const useAuthStore = create<AuthState>((set) => ({
-  user: null,
-  accessToken: null,
-  setAuth: (token) => {
-    const decoded = jwtDecode<JwtPayload>(token);
-    set({ accessToken: token, user: decoded });
-  },
-  clearAuth: () => set({ user: null, accessToken: null }),
-}));
+export const useAuthStore = create<AuthState>()(
+  persist(
+    (set) => ({
+      user: null,
+      accessToken: null,
+      setAuth: (token: string) => {
+        const decoded = jwtDecode<JwtPayload>(token);
+        set({ accessToken: token, user: decoded });
+      },
+      clearAuth: () => set({ user: null, accessToken: null }),
+    }),
+    {
+      name: "kaizen-auth-storage",
+    }
+  )
+);
