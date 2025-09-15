@@ -9,6 +9,7 @@ import {
   createProjectRouter,
   createProjectSchema,
 } from "./createProjectRouter";
+import { getSingleOrganizationRouter } from "./getSingleOrganizationRouter";
 
 const router: Router = Router();
 
@@ -24,5 +25,8 @@ router.post(
   validate(createProjectSchema),
   createProjectRouter
 );
+
+// GET SINGLE ORGANIZATION
+router.get("/:orgId", getSingleOrganizationRouter);
 
 export default router;

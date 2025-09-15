@@ -1,35 +1,24 @@
 import { NextFunction, Request, Response } from "express";
-
-import z from "zod";
+import { getSingleOrganization } from "../../../services/organization";
 import UnauthorizedException from "../../../exceptions/unauthorized";
-import { getOrganizationMembers } from "../../../services/organization";
 import BadRequestException from "../../../exceptions/badRequest";
 import NotFoundException from "../../../exceptions/notFound";
-import { createProject } from "../../../services/project";
 
-export const createProjectSchema = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-});
-
-export const createProjectRouter = async (
+export const getSingleOrganizationRouter = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const { name, description } = req.body as z.infer<
-      typeof createProjectSchema
-    >;
     const { orgId } = req.params;
-
-    if (!orgId) throw new BadRequestException("Organization ID required");
+    if (!orgId) throw new BadRequestException("Org Id is required");
 
     if (!req.user) {
       throw new UnauthorizedException();
     }
 
-    const organization = await getOrganizationMembers(orgId);
+    const organization = await getSingleOrganization(orgId);
+
     if (!organization) throw new NotFoundException("Organization not found");
 
     const isOwner = organization.ownerId === req.user.id;
@@ -37,12 +26,10 @@ export const createProjectRouter = async (
 
     if (!isOwner && !isMember)
       throw new UnauthorizedException(
-        "Not authorized to create project in this organization"
+        "Not authorized to access this organization"
       );
 
-    const project = await createProject(orgId, name, description);
-
-    res.status(201).json({ success: true, project });
+    res.status(201).json({ success: true, organization });
   } catch (error) {
     next(error);
   }

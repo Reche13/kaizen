@@ -47,3 +47,20 @@ export const getOrganizationMembers = async (orgId: string) => {
     return null;
   }
 };
+
+export const getSingleOrganization = async (orgId: string) => {
+  try {
+    const organization = await db.organization.findUnique({
+      where: { id: orgId },
+      select: {
+        id: true,
+        ownerId: true,
+        members: { select: { id: true } },
+        projects: true,
+      },
+    });
+    return organization;
+  } catch (error) {
+    return null;
+  }
+};
